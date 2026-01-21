@@ -1,0 +1,19 @@
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <header class="text-center mb-16 md:mb-24 reveal">
+    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 mb-2">Our Services</h1>
+    <p class="font-serif text-lg text-slate-500 italic">Comprehensive financial solutions to empower your business growth.</p>
+  </header>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    @for (service of services; track service.title) {
+      <div class="group bg-white p-6 sm:p-8 border border-slate-200 h-full flex flex-col transition-all duration-300 ease-in-out hover:border-slate-800 hover:-translate-y-2 hover:shadow-2xl reveal">
+        <div class="w-16 h-16 flex items-center justify-center bg-slate-100 rounded-full mb-5 transition-colors duration-300 ease-in-out group-hover:bg-slate-900">
+          <i [attr.data-lucide]="service.icon" class="w-8 h-8 text-slate-800 transition-colors duration-300 ease-in-out group-hover:text-white"></i>
+        </div>
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-slate-900 mb-2">{{ service.title }}</h3>
+        <p class="text-slate-600 leading-relaxed">{{ service.description }}</p>
+      </div>
+    }
+  </div>
+</div>

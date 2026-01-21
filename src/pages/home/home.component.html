@@ -1,0 +1,132 @@
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+    <!-- Left Section -->
+    <section class="lg:pt-8 text-center lg:text-left">
+      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0a2540] leading-tight tracking-tight mb-6">
+        Hi, I'm Rishi Jha, an Accounting & Taxation Expert from Delhi.
+      </h1>
+      <p class="text-lg text-[#495057] mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+        Providing strategic financial oversight, tax planning, and compliance solutions for growth-oriented businesses and individuals.
+      </p>
+      
+      <div class="flex flex-col items-center lg:items-start gap-3">
+        <button (click)="openModal()" class="group relative inline-flex items-center justify-center gap-3 bg-[#0a2540] text-white font-semibold py-4 px-10 rounded-full text-lg overflow-hidden transition-all duration-300 ease-in-out hover:bg-[#0d3157] hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a2540]">
+          <span class="relative z-10">Access</span>
+          <i data-lucide="lock" class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110"></i>
+          <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+        </button>
+        <span class="text-xs font-medium text-[#6c757d] tracking-wide uppercase px-2">Secure Login for Existing Clients</span>
+      </div>
+    </section>
+
+    <!-- Right Section -->
+    <section class="flex flex-col gap-8">
+      <div class="w-full aspect-square bg-white rounded-3xl overflow-hidden shadow-lg border border-[#dee2e6] relative group">
+        <div class="absolute inset-0 bg-[#0a2540]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1000" alt="Accounting Professional Workspace" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+      </div>
+
+      <div class="bg-white p-8 rounded-3xl shadow-lg border border-[#dee2e6]">
+        <h2 class="font-serif text-3xl font-bold text-[#0a2540] mb-6">Contact Us.</h2>
+        <div class="flex items-center gap-4 mb-6">
+          <a href="https://www.linkedin.com/in/rishi-jha-902757327/" target="_blank" title="LinkedIn" class="w-12 h-12 flex items-center justify-center rounded-xl bg-[#e9ecef] text-[#495057] hover:bg-[#0a2540] hover:text-white transition-all duration-300 hover:-translate-y-1">
+            <i data-lucide="linkedin" class="w-5 h-5"></i>
+          </a>
+          <a href="mailto:rishijha@tuta.io" title="Email" class="w-12 h-12 flex items-center justify-center rounded-xl bg-[#e9ecef] text-[#495057] hover:bg-[#0a2540] hover:text-white transition-all duration-300 hover:-translate-y-1">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </a>
+        </div>
+        <div class="flex flex-col gap-3">
+          <a href="mailto:rishijha@tuta.io" class="group flex items-center gap-3 text-[#6c757d] hover:text-[#0a2540] transition-colors duration-300">
+            <div class="w-6 h-6 rounded-full bg-[#e9ecef] flex items-center justify-center group-hover:bg-[#0a2540] transition-colors">
+                 <i data-lucide="chevron-right" class="w-3 h-3 text-[#495057] group-hover:text-white transition-colors"></i>
+            </div>
+            <span class="font-medium">rishijha@tuta.io</span>
+          </a>
+          <a href="mailto:ramkj1804@gmail.com" class="group flex items-center gap-3 text-[#6c757d] hover:text-[#0a2540] transition-colors duration-300">
+            <div class="w-6 h-6 rounded-full bg-[#e9ecef] flex items-center justify-center group-hover:bg-[#0a2540] transition-colors">
+                 <i data-lucide="chevron-right" class="w-3 h-3 text-[#495057] group-hover:text-white transition-colors"></i>
+            </div>
+            <span class="font-medium">ramkj1804@gmail.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Professional Secure Password Modal -->
+<div 
+  class="fixed inset-0 z-[100] flex items-center justify-center transition-all duration-300"
+  [class.pointer-events-none]="!isModalVisible()"
+  [class.opacity-0]="!isModalVisible()"
+  [class.opacity-100]="isModalVisible()">
+  
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-[#0a2540]/60 backdrop-blur-md transition-opacity duration-300" (click)="closeModal()"></div>
+
+  <!-- Modal Content -->
+  <div 
+    class="bg-white rounded-2xl shadow-2xl w-full max-w-md m-4 relative overflow-hidden transform transition-all duration-300 cubic-bezier(0.16, 1, 0.3, 1) border border-[#dee2e6]"
+    [class.scale-95]="!isModalVisible()"
+    [class.translate-y-8]="!isModalVisible()"
+    [class.scale-100]="isModalVisible()"
+    [class.translate-y-0]="isModalVisible()"
+    (click)="$event.stopPropagation()">
+    
+    <!-- Header -->
+    <div class="bg-[#f8f9fa] px-8 py-6 border-b border-[#dee2e6] flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-[#0a2540]/10 flex items-center justify-center text-[#0a2540]">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </div>
+        <h3 class="text-xl font-serif font-bold text-[#0a2540]">Secure Access</h3>
+      </div>
+      <button (click)="closeModal()" class="text-[#6c757d] hover:text-[#0a2540] transition-colors p-2 rounded-full hover:bg-[#e9ecef]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-8">
+      <p class="text-[#495057] mb-6 text-sm leading-relaxed">
+        This area is restricted to existing clients. Please enter your provided access code to view protected documents and filings.
+      </p>
+      
+      <div class="relative mb-2">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <i data-lucide="key" class="w-5 h-5 text-[#adb5bd] transition-colors" [class.text-red-400]="errorMessage()"></i>
+        </div>
+        <input 
+          type="password" 
+          [value]="passwordInput()" 
+          (input)="passwordInput.set($any($event.target).value); errorMessage.set('')" 
+          (keydown)="handleKey($event)" 
+          placeholder="Enter Access Code" 
+          class="w-full pl-10 pr-4 py-3 border border-[#dee2e6] rounded-lg focus:ring-2 focus:ring-[#0a2540] focus:border-[#0a2540] outline-none transition-all placeholder:text-[#adb5bd] text-[#0a2540] font-medium"
+          [class.border-red-500]="errorMessage()"
+          [class.focus:border-red-500]="errorMessage()"
+          [class.focus:ring-red-500]="errorMessage()"
+          #passInput>
+      </div>
+
+      @if (errorMessage()) {
+        <div class="flex items-center gap-2 text-red-600 text-xs font-medium mt-2 animate-pulse">
+           <i data-lucide="alert-circle" class="w-3 h-3"></i>
+           <span>{{ errorMessage() }}</span>
+        </div>
+      }
+
+      <div class="mt-8 flex justify-end gap-3">
+        <button (click)="closeModal()" class="px-5 py-2.5 text-sm font-medium text-[#495057] hover:text-[#0a2540] hover:bg-[#f8f9fa] rounded-lg transition-colors border border-transparent hover:border-[#e9ecef]">
+          Cancel
+        </button>
+        <button (click)="verifyPassword()" class="px-6 py-2.5 text-sm font-medium text-white bg-[#0a2540] rounded-lg hover:bg-[#0d3157] transition-all shadow-md hover:shadow-lg active:scale-95 flex items-center gap-2">
+          <span>Access Portal</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

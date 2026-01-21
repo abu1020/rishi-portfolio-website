@@ -1,0 +1,43 @@
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <header class="text-center mb-16 md:mb-24 reveal">
+    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 mb-2">About Us</h1>
+    <p class="font-serif text-lg text-slate-500 italic">Rishi Jha | Strategic Counsel in Financial Compliance</p>
+  </header>
+
+  <div class="grid gap-16 md:gap-24">
+    <!-- Bio Section -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
+      <div class="group relative order-last md:order-first">
+        <div class="w-full aspect-[4/5] bg-slate-200 overflow-hidden shadow-[20px_20px_0px_-2px_#1e293b] transition-all duration-500 ease-in-out group-hover:shadow-[25px_25px_0px_-2px_#1e293b] group-hover:-translate-x-1 group-hover:-translate-y-1">
+          <img src="https://lh3.googleusercontent.com/d/13R7F8Dx9lous4OgZ908EjAvY3uTL1jgt" alt="Rishi Jha Portrait" class="w-full h-full object-cover object-center filter grayscale-[50%] group-hover:grayscale-0 transition-all duration-500 ease-in-out scale-105 group-hover:scale-110" />
+        </div>
+      </div>
+      <div class="text-center md:text-left">
+        <h2 class="font-serif text-4xl font-bold text-slate-900 leading-tight mb-6">The Mission</h2>
+        <p class="text-lg text-slate-600 mb-4">
+          Based in Delhi, I provide high-tier financial oversight and specialized tax planning for growth-oriented businesses. I believe that accounting isn't just about balancing books—it's about creating a clear roadmap for financial stability.
+        </p>
+        <p class="text-lg text-slate-600">
+          From complex GST frameworks to meticulous auditing, my practice is built on the pillars of transparency, precision, and proactive compliance.
+        </p>
+      </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section>
+      <h2 class="font-serif text-4xl font-bold text-slate-900 text-center mb-12 reveal">Core Expertise</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        @for (item of expertise; track item.title) {
+          <div class="bg-white p-8 border border-slate-200 h-full flex flex-col transition-all duration-300 ease-in-out hover:border-slate-800 hover:-translate-y-2 hover:shadow-2xl reveal">
+            <div class="w-16 h-16 flex items-center justify-center bg-slate-100 rounded-full mb-6">
+              <i [attr.data-lucide]="item.icon" class="w-8 h-8 text-slate-800"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slate-900 mb-3">{{ item.title }}</h3>
+            <p class="text-slate-600 leading-relaxed">{{ item.description }}</p>
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>

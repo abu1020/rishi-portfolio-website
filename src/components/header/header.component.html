@@ -1,0 +1,37 @@
+
+<header class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <div class="flex items-center">
+        <a routerLink="/home" (click)="closeMenu()" class="text-xl font-bold text-slate-900 tracking-tight">Rishi Jha</a>
+      </div>
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-4">
+          <a routerLink="/home" routerLinkActive="text-slate-900 font-medium" [routerLinkActiveOptions]="{exact: true}" class="text-slate-500 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+          <a routerLink="/about" routerLinkActive="text-slate-900 font-medium" class="text-slate-500 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+          <a routerLink="/services" routerLinkActive="text-slate-900 font-medium" class="text-slate-500 hover:text-slate-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">Services</a>
+        </div>
+      </div>
+      <div class="-mr-2 flex md:hidden">
+        <button (click)="toggleMenu()" type="button" class="bg-slate-100 inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-100 focus:ring-slate-500" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          @if (!isMenuOpen()) {
+            <i data-lucide="menu" class="block h-6 w-6"></i>
+          } @else {
+            <i data-lucide="x" class="block h-6 w-6"></i>
+          }
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  @if (isMenuOpen()) {
+    <div class="md:hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a routerLink="/home" (click)="closeMenu()" routerLinkActive="bg-slate-200 text-slate-900" [routerLinkActiveOptions]="{exact: true}" class="text-slate-600 hover:bg-slate-100 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+        <a routerLink="/about" (click)="closeMenu()" routerLinkActive="bg-slate-200 text-slate-900" class="text-slate-600 hover:bg-slate-100 block px-3 py-2 rounded-md text-base font-medium">About</a>
+        <a routerLink="/services" (click)="closeMenu()" routerLinkActive="bg-slate-200 text-slate-900" class="text-slate-600 hover:bg-slate-100 block px-3 py-2 rounded-md text-base font-medium">Services</a>
+      </div>
+    </div>
+  }
+</header>
