@@ -1,5 +1,5 @@
 
-import { Component, ChangeDetectionStrategy, signal, afterNextRender, ViewChild, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, afterNextRender, ViewChild, ElementRef, inject, DestroyRef } from '@angular/core';
 
 declare var lucide: any;
 
@@ -13,6 +13,7 @@ export class HomeComponent {
   isModalVisible = signal(false);
   passwordInput = signal('');
   errorMessage = signal('');
+  private destroyRef = inject(DestroyRef);
 
   @ViewChild('passInput') passInput!: ElementRef<HTMLInputElement>;
 
@@ -22,6 +23,11 @@ export class HomeComponent {
   constructor() {
     afterNextRender(() => {
       lucide.createIcons();
+    });
+
+    // Ensure body scroll is unlocked if component is destroyed while modal is open
+    this.destroyRef.onDestroy(() => {
+      document.body.classList.remove('overflow-hidden');
     });
   }
 

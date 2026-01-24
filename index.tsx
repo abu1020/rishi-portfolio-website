@@ -1,7 +1,7 @@
 
 import '@angular/compiler';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { provideRouter, withHashLocation } from '@angular/router';
+import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 import { provideZonelessChangeDetection, enableProdMode } from '@angular/core';
 
 import { AppComponent } from './src/app.component';
@@ -12,7 +12,14 @@ enableProdMode();
 bootstrapApplication(AppComponent, {
   providers: [
     provideZonelessChangeDetection(),
-    provideRouter(APP_ROUTES, withHashLocation()),
+    provideRouter(
+      APP_ROUTES, 
+      withHashLocation(),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'top',
+        anchorScrolling: 'enabled',
+      })
+    ),
   ],
 }).catch((err) => console.error(err));
 

@@ -4,18 +4,23 @@
     <!-- Left Section -->
     <section class="lg:pt-8 text-center lg:text-left">
       <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0a2540] leading-tight tracking-tight mb-6">
-        Hi, I'm Rishi Jha, an Accounting & Taxation Expert from Delhi.
+        Hi, I'm Rishi Jha, an Accountant & Taxation Expert from Delhi.
       </h1>
       <p class="text-lg text-[#495057] mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
         Providing strategic financial oversight, tax planning, and compliance solutions for growth-oriented businesses and individuals.
       </p>
       
-      <div class="flex flex-col items-center lg:items-start gap-3">
-        <button (click)="openModal()" class="group relative inline-flex items-center justify-center gap-3 bg-[#0a2540] text-white font-semibold py-4 px-10 rounded-full text-lg overflow-hidden transition-all duration-300 ease-in-out hover:bg-[#0d3157] hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a2540]">
+      <div class="flex flex-col sm:flex-row items-center lg:items-start gap-4">
+        <button (click)="openModal()" class="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 bg-[#0a2540] text-white font-semibold py-4 px-10 rounded-full text-lg overflow-hidden transition-all duration-300 ease-in-out hover:bg-[#0d3157] hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a2540]">
           <span class="relative z-10">Access</span>
           <i data-lucide="lock" class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:scale-110"></i>
           <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
         </button>
+
+        <a href="https://rishijha-contact.vercel.app" class="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 bg-white text-[#0a2540] border-2 border-[#0a2540] font-semibold py-3.5 px-10 rounded-full text-lg overflow-hidden transition-all duration-300 ease-in-out hover:bg-slate-50 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a2540]">
+          <span class="relative z-10">Contact Us</span>
+          <i data-lucide="arrow-right" class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1"></i>
+        </a>
       </div>
     </section>
 
@@ -23,7 +28,7 @@
     <section class="flex flex-col gap-8">
       <div class="w-full aspect-square bg-white rounded-3xl overflow-hidden shadow-lg border border-[#dee2e6] relative group">
         <div class="absolute inset-0 bg-[#0a2540]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1000" alt="Accounting Professional Workspace" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000" alt="Financial Growth and Planning" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105">
       </div>
 
       <div class="bg-white p-8 rounded-3xl shadow-lg border border-[#dee2e6]">
@@ -64,8 +69,9 @@
 <!-- Professional Secure Password Modal -->
 <div 
   class="fixed inset-0 z-[100] flex items-center justify-center transition-all duration-300"
-  [class.pointer-events-none]="!isModalVisible()"
+  [class.invisible]="!isModalVisible()"
   [class.opacity-0]="!isModalVisible()"
+  [class.visible]="isModalVisible()"
   [class.opacity-100]="isModalVisible()">
   
   <!-- Backdrop -->
