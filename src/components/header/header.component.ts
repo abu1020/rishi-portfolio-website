@@ -1,5 +1,4 @@
-
-import { Component, ChangeDetectionStrategy, signal, afterNextRender } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, afterNextRender, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 declare var lucide: any;
@@ -12,6 +11,7 @@ declare var lucide: any;
 })
 export class HeaderComponent {
   isMenuOpen = signal(false);
+  scrollProgress = signal(0);
 
   constructor() {
     afterNextRender(() => {
@@ -19,9 +19,17 @@ export class HeaderComponent {
     });
   }
 
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (totalHeight > 0) {
+      const progress = (window.scrollY / totalHeight) * 100;
+      this.scrollProgress.set(progress);
+    }
+  }
+
   toggleMenu() {
     this.isMenuOpen.update(value => !value);
-    // Re-render icons when menu opens/closes
     setTimeout(() => lucide.createIcons(), 0);
   }
 

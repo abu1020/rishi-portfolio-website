@@ -1,0 +1,140 @@
+<div class="bg-slate-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+      <a routerLink="/home" class="hover:text-[#0a2540] transition-colors flex items-center gap-1">
+        <i data-lucide="home" class="w-4 h-4"></i> Home
+      </a>
+      <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+      <span class="text-[#0a2540] font-medium">Contact Us</span>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+      <span class="text-xs font-bold uppercase tracking-widest text-[#0a2540] bg-[#0a2540]/10 px-3 py-1 rounded-full">Get In Touch</span>
+      <h1 class="text-3xl sm:text-4xl font-serif font-bold text-[#0a2540] mt-3">Let's Discuss Your Financial & Tax Needs</h1>
+      <p class="text-slate-600 mt-2 max-w-2xl mx-auto">Schedule a consultation or send an inquiry. We respond to all professional queries within 24 business hours.</p>
+    </div>
+
+    @if (!isSubmitted()) {
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200/80 overflow-hidden grid md:grid-cols-5">
+        <!-- Contact Info Sidebar -->
+        <div class="md:col-span-2 bg-[#0a2540] text-white p-8 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>
+          <div>
+            <h3 class="font-serif text-2xl font-bold mb-4">Contact Information</h3>
+            <p class="text-slate-300 text-sm mb-8 leading-relaxed">Reach out directly via phone, email, or visit our office for expert tax and accounting guidance.</p>
+            
+            <ul class="space-y-6 text-sm">
+              <li class="flex items-start gap-3">
+                <div class="p-2.5 bg-white/10 rounded-xl mt-0.5">
+                  <i data-lucide="map-pin" class="w-5 h-5 text-emerald-400"></i>
+                </div>
+                <div>
+                  <strong class="block text-white font-medium">Office Location</strong>
+                  <span class="text-slate-300 text-xs mt-0.5 block leading-relaxed">Professional Tax & Accounting Chambers, Financial District</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="p-2.5 bg-white/10 rounded-xl mt-0.5">
+                  <i data-lucide="mail" class="w-5 h-5 text-emerald-400"></i>
+                </div>
+                <div>
+                  <strong class="block text-white font-medium">Email Us</strong>
+                  <span class="text-slate-300 text-xs mt-0.5 block">contact&#64;rishijha.expert</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <div class="p-2.5 bg-white/10 rounded-xl mt-0.5">
+                  <i data-lucide="phone" class="w-5 h-5 text-emerald-400"></i>
+                </div>
+                <div>
+                  <strong class="block text-white font-medium">Phone Support</strong>
+                  <span class="text-slate-300 text-xs mt-0.5 block">+1 (555) 382-9102</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-12 pt-6 border-t border-white/10 text-xs text-slate-400">
+            <p>Confidentiality Guaranteed. All client discussions are protected under professional privilege.</p>
+          </div>
+        </div>
+
+        <!-- Form Area -->
+        <div class="md:col-span-3 p-8 sm:p-10">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            @if (errorMessage()) {
+              <div class="p-4 bg-rose-50 border border-rose-200 text-rose-700 text-sm rounded-xl flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-5 h-5 shrink-0"></i>
+                <span>{{ errorMessage() }}</span>
+              </div>
+            }
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Full Name <span class="text-rose-500">*</span></label>
+              <input type="text" formControlName="name" placeholder="John Doe" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0a2540] focus:border-transparent text-sm transition-all" />
+              @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
+                <span class="text-xs text-rose-500 mt-1 block">Please enter your full name.</span>
+              }
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">Email Address <span class="text-rose-500">*</span></label>
+                <input type="email" formControlName="email" placeholder="john&#64;example.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0a2540] focus:border-transparent text-sm transition-all" />
+                @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
+                  <span class="text-xs text-rose-500 mt-1 block">Please enter a valid email address.</span>
+                }
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 mb-1.5">Phone Number</label>
+                <input type="tel" formControlName="phone" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0a2540] focus:border-transparent text-sm transition-all" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Service Required <span class="text-rose-500">*</span></label>
+              <select formControlName="serviceType" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0a2540] focus:border-transparent text-sm bg-white transition-all">
+                <option value="tax-filing">Corporate & Individual Tax Filing</option>
+                <option value="accounting">Bookkeeping & Financial Statements</option>
+                <option value="audit">Tax Audit & Assurance</option>
+                <option value="advisory">Strategic Tax Planning & Advisory</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Your Message <span class="text-rose-500">*</span></label>
+              <textarea formControlName="message" rows="4" placeholder="Briefly describe your requirements..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0a2540] focus:border-transparent text-sm transition-all"></textarea>
+              @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
+                <span class="text-xs text-rose-500 mt-1 block">Message must be at least 10 characters long.</span>
+              }
+            </div>
+
+            <button type="submit" [disabled]="isSubmitting()" class="w-full bg-[#0a2540] hover:bg-[#0d3157] text-white py-3.5 px-6 rounded-xl font-medium transition-all shadow-lg shadow-[#0a2540]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70">
+              @if (isSubmitting()) {
+                <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+                <span>Sending Message...</span>
+              } @else {
+                <span>Send Message</span>
+                <i data-lucide="send" class="w-4 h-4"></i>
+              }
+            </button>
+          </form>
+        </div>
+      </div>
+    } @else {
+      <!-- Success Card -->
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200/80 p-12 text-center max-w-xl mx-auto">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+          <i data-lucide="check" class="w-8 h-8"></i>
+        </div>
+        <h3 class="font-serif text-2xl font-bold text-[#0a2540] mb-3">Message Sent Successfully!</h3>
+        <p class="text-slate-600 text-sm mb-8 leading-relaxed">Thank you for reaching out. Rishi Jha's advisory team has received your message and will review your requirements promptly.</p>
+        <button (click)="resetForm()" class="bg-[#0a2540] hover:bg-[#0d3157] text-white px-6 py-3 rounded-xl text-sm font-medium transition-all shadow-md">
+          Send Another Inquiry
+        </button>
+      </div>
+    }
+  </div>
+</div>
