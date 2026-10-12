@@ -1,19 +1,46 @@
-
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-  <header class="text-center mb-16 md:mb-24 reveal">
-    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 mb-2">Our Services</h1>
-    <p class="font-serif text-lg text-slate-500 italic">Comprehensive financial solutions to empower your business growth.</p>
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8 reveal">
+    <a routerLink="/home" class="hover:text-[#0a2540] transition-colors flex items-center gap-1">
+      <i data-lucide="home" class="w-4 h-4"></i> Home
+    </a>
+    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+    <span class="text-[#0a2540] font-medium">Services & Expertise</span>
+  </nav>
+
+  <header class="text-center mb-16 md:mb-20 reveal">
+    <span class="text-xs font-bold uppercase tracking-widest text-[#0a2540] bg-[#0a2540]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">Professional Offerings</span>
+    <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 mb-3">Our Services</h1>
+    <p class="font-serif text-lg text-slate-500 italic max-w-xl mx-auto">Comprehensive financial solutions to empower your business growth and ensure flawless regulatory compliance.</p>
   </header>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
     @for (service of services; track service.title) {
-      <a href="https://rishijha-contact.vercel.app" class="group bg-white p-6 sm:p-8 border border-slate-200 h-full flex flex-col transition-all duration-300 ease-in-out hover:border-slate-800 hover:-translate-y-2 hover:shadow-2xl reveal block text-left no-underline">
-        <div class="w-16 h-16 flex items-center justify-center bg-slate-100 rounded-full mb-5 transition-colors duration-300 ease-in-out group-hover:bg-slate-900">
+      <a routerLink="/contact" class="group bg-white p-8 border border-slate-200/80 rounded-2xl h-full flex flex-col transition-all duration-300 ease-in-out hover:border-[#0a2540] hover:-translate-y-1.5 hover:shadow-xl reveal block text-left no-underline relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0a2540] to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="w-16 h-16 flex items-center justify-center bg-slate-100 rounded-2xl mb-6 transition-all duration-300 ease-in-out group-hover:bg-[#0a2540] group-hover:shadow-lg group-hover:scale-105">
           <i [attr.data-lucide]="service.icon" class="w-8 h-8 text-slate-800 transition-colors duration-300 ease-in-out group-hover:text-white"></i>
         </div>
-        <h3 class="font-serif text-xl sm:text-2xl font-bold text-slate-900 mb-2">{{ service.title }}</h3>
-        <p class="text-slate-600 leading-relaxed">{{ service.description }}</p>
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#0a2540] transition-colors">{{ service.title }}</h3>
+        <p class="text-slate-600 leading-relaxed text-sm mb-6 flex-grow">{{ service.description }}</p>
+        <div class="flex items-center gap-2 text-[#0a2540] text-sm font-semibold group-hover:translate-x-1 transition-transform">
+          <span>Inquire Now</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </div>
       </a>
     }
+  </div>
+
+  <!-- Bottom CTA Banner -->
+  <div class="bg-[#0a2540] text-white rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden reveal shadow-2xl">
+    <div class="absolute -right-16 -top-16 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="relative z-10 max-w-2xl mx-auto">
+      <h3 class="font-serif text-3xl sm:text-4xl font-bold mb-4">Need Custom Financial Advisory?</h3>
+      <p class="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed">Every business has unique requirements. Let's discuss a tailored compliance and tax strategy for your enterprise.</p>
+      <a routerLink="/contact" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-8 py-4 rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+        <span>Schedule Consultation</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+    </div>
   </div>
 </div>

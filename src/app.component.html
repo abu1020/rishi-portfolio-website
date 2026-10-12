@@ -1,8 +1,401 @@
+<div class="min-h-screen bg-slate-50 text-slate-800 flex flex-col antialiased selection:bg-[#0a2540] selection:text-white">
+  
+  <!-- ==================== ULTRA-MODERN FLOATING COMMAND NAVIGATION ==================== -->
+  <header class="sticky top-4 z-50 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 shadow-lg rounded-2xl px-4 sm:px-6 py-3.5 flex items-center justify-between transition-all">
+      
+      <!-- Brand Logo / Animated Accounting Symbol (NO LETTERS) -->
+      <button (click)="switchTab('home')" class="flex items-center gap-3.5 group select-none text-left cursor-pointer">
+        <div class="relative w-11 h-11 flex items-center justify-center bg-gradient-to-br from-[#0a2540] to-[#0d3157] rounded-xl text-white shadow-md shadow-[#0a2540]/30 overflow-hidden group-hover:scale-105 transition-transform duration-300 border border-white/10">
+          <!-- Subtle animated glowing backdrop -->
+          <div class="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500/30 rounded-full blur-md animate-pulse"></div>
+          <!-- Accounting Symbol: Ledger Grid & Balance Scale vector -->
+          <svg class="w-6 h-6 text-emerald-400 relative z-10 transition-transform duration-500 group-hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif text-lg sm:text-xl font-bold text-[#0a2540] leading-tight tracking-tight">Rishi Jha</span>
+          <span class="text-[0.6rem] font-bold uppercase tracking-[0.25em] text-slate-500">Tax & Accounting</span>
+        </div>
+      </button>
 
-<div class="flex flex-col min-h-screen">
-  <app-header></app-header>
-  <main class="flex-grow">
-    <router-outlet></router-outlet>
+      <!-- Center Tabs (Desktop) -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-100 p-1.5 rounded-xl border border-slate-200/60">
+        <button (click)="switchTab('home')" [class.bg-white]="currentTab() === 'home'" [class.shadow-xs]="currentTab() === 'home'" [class.text-[#0a2540]]="currentTab() === 'home'" [class.font-semibold]="currentTab() === 'home'" class="px-5 py-2 rounded-lg text-sm text-slate-600 hover:text-[#0a2540] transition-all cursor-pointer flex items-center gap-2">
+          <i data-lucide="home" class="w-4 h-4"></i>
+          <span>Home</span>
+        </button>
+        <button (click)="switchTab('about')" [class.bg-white]="currentTab() === 'about'" [class.shadow-xs]="currentTab() === 'about'" [class.text-[#0a2540]]="currentTab() === 'about'" [class.font-semibold]="currentTab() === 'about'" class="px-5 py-2 rounded-lg text-sm text-slate-600 hover:text-[#0a2540] transition-all cursor-pointer flex items-center gap-2">
+          <i data-lucide="user" class="w-4 h-4"></i>
+          <span>About</span>
+        </button>
+        <button (click)="switchTab('services')" [class.bg-white]="currentTab() === 'services'" [class.shadow-xs]="currentTab() === 'services'" [class.text-[#0a2540]]="currentTab() === 'services'" [class.font-semibold]="currentTab() === 'services'" class="px-5 py-2 rounded-lg text-sm text-slate-600 hover:text-[#0a2540] transition-all cursor-pointer flex items-center gap-2">
+          <i data-lucide="briefcase" class="w-4 h-4"></i>
+          <span>Services</span>
+        </button>
+        <button (click)="switchTab('contact')" [class.bg-white]="currentTab() === 'contact'" [class.shadow-xs]="currentTab() === 'contact'" [class.text-[#0a2540]]="currentTab() === 'contact'" [class.font-semibold]="currentTab() === 'contact'" class="px-5 py-2 rounded-lg text-sm text-slate-600 hover:text-[#0a2540] transition-all cursor-pointer flex items-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4"></i>
+          <span>Contact</span>
+        </button>
+      </nav>
+
+      <!-- Right Action / Sign In -->
+      <div class="flex items-center gap-3">
+        @if (!firebaseService.currentUser()) {
+          <button (click)="signInWithGoogle()" [disabled]="isLoggingIn()" class="bg-[#0a2540] hover:bg-[#0d3157] text-white px-5 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer disabled:opacity-70">
+            @if (isLoggingIn()) {
+              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+              <span class="hidden sm:inline">Signing In...</span>
+            } @else {
+              <i data-lucide="log-in" class="w-4 h-4"></i>
+              <span>Sign In</span>
+            }
+          </button>
+        } @else {
+          <div class="flex items-center gap-2.5 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl">
+            @if (firebaseService.currentUser()?.photoURL) {
+              <img [src]="firebaseService.currentUser()?.photoURL" alt="avatar" class="w-6 h-6 rounded-full object-cover" referrerpolicy="no-referrer" />
+            } @else {
+              <div class="w-6 h-6 rounded-full bg-[#0a2540] text-white flex items-center justify-center text-xs font-bold">
+                {{ firebaseService.currentUser()?.email?.[0]?.toUpperCase() }}
+              </div>
+            }
+            <span class="text-xs font-semibold text-[#0a2540] max-w-[90px] truncate hidden sm:inline">{{ firebaseService.currentUser()?.displayName }}</span>
+            <button (click)="signOutUser()" title="Sign Out" class="text-slate-400 hover:text-rose-600 p-1 rounded-md hover:bg-white transition-colors cursor-pointer">
+              <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        }
+
+        <!-- Mobile Menu Trigger -->
+        <button (click)="mobileMenuOpen.update(v => !v)" class="md:hidden p-2 rounded-xl bg-slate-100 text-[#0a2540] border border-slate-200 cursor-pointer">
+          @if (!mobileMenuOpen()) {
+            <i data-lucide="menu" class="w-5 h-5"></i>
+          } @else {
+            <i data-lucide="x" class="w-5 h-5"></i>
+          }
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    @if (mobileMenuOpen()) {
+      <div class="md:hidden mt-2 bg-white rounded-2xl border border-slate-200 shadow-2xl p-4 space-y-2 animate-in slide-in-from-top-2">
+        <button (click)="switchTab('home')" class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 font-medium text-slate-700 hover:bg-slate-100">
+          <i data-lucide="home" class="w-5 h-5 text-[#0a2540]"></i> Home
+        </button>
+        <button (click)="switchTab('about')" class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 font-medium text-slate-700 hover:bg-slate-100">
+          <i data-lucide="user" class="w-5 h-5 text-[#0a2540]"></i> About
+        </button>
+        <button (click)="switchTab('services')" class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 font-medium text-slate-700 hover:bg-slate-100">
+          <i data-lucide="briefcase" class="w-5 h-5 text-[#0a2540]"></i> Services
+        </button>
+        <button (click)="switchTab('contact')" class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 font-medium text-slate-700 hover:bg-slate-100">
+          <i data-lucide="mail" class="w-5 h-5 text-[#0a2540]"></i> Contact
+        </button>
+        <div class="pt-3 border-t border-slate-100">
+          @if (!firebaseService.currentUser()) {
+            <button (click)="signInWithGoogle(); mobileMenuOpen.set(false)" class="w-full bg-[#0a2540] text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="log-in" class="w-4 h-4"></i> Sign In
+            </button>
+          } @else {
+            <button (click)="signOutUser(); mobileMenuOpen.set(false)" class="w-full bg-rose-50 text-rose-700 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="log-out" class="w-4 h-4"></i> Sign Out
+            </button>
+          }
+        </div>
+      </div>
+    }
+  </header>
+
+  <!-- ==================== MAIN CONTENT AREA ==================== -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+    
+    <!-- TAB 1: HOME -->
+    @if (currentTab() === 'home') {
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center animate-in fade-in duration-300">
+        <section class="text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0a2540]/10 text-[#0a2540] text-xs font-semibold uppercase tracking-widest mb-6">
+            <i data-lucide="award" class="w-4 h-4 text-emerald-600"></i>
+            <span>Certified Tax & Accounting Professional</span>
+          </div>
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0a2540] leading-tight tracking-tight mb-6">
+            Hi, I'm Rishi Jha, an Accountant & Taxation Expert from Delhi.
+          </h1>
+          <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Providing strategic financial oversight, tax planning, and compliance solutions for growth-oriented businesses and individuals.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <button (click)="openModal()" class="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 bg-[#0a2540] text-white font-semibold py-4 px-9 rounded-2xl text-base shadow-lg hover:bg-[#0d3157] hover:shadow-xl hover:-translate-y-0.5 transition-all cursor-pointer">
+              <span>Client Portal</span>
+              <i data-lucide="lock" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+            </button>
+
+            <button (click)="switchTab('contact')" class="w-full sm:w-auto group relative inline-flex items-center justify-center gap-3 bg-white text-[#0a2540] border-2 border-[#0a2540] font-semibold py-3.5 px-9 rounded-2xl text-base shadow-md hover:bg-slate-50 hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer">
+              <span>Contact Us</span>
+              <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+          </div>
+        </section>
+
+        <section class="flex flex-col gap-6">
+          <div class="w-full aspect-square bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-200 relative group">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000" alt="Financial Growth" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" referrerpolicy="no-referrer">
+          </div>
+
+          <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
+            <h3 class="font-serif text-2xl font-bold text-[#0a2540] mb-6">Direct Inquiries</h3>
+            <div class="flex items-center gap-4 mb-6">
+              <a href="https://www.linkedin.com/in/rishi-jha-902757327/" target="_blank" title="LinkedIn" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-700 hover:bg-[#0a2540] hover:text-white transition-all hover:-translate-y-1">
+                <i data-lucide="linkedin" class="w-5 h-5"></i>
+              </a>
+              <a href="mailto:rishijha@tuta.io" title="Email" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-slate-100 text-slate-700 hover:bg-[#0a2540] hover:text-white transition-all hover:-translate-y-1">
+                <i data-lucide="mail" class="w-5 h-5"></i>
+              </a>
+              <button (click)="switchTab('contact')" title="Contact Page" class="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#0a2540]/10 text-[#0a2540] hover:bg-[#0a2540] hover:text-white transition-all hover:-translate-y-1 cursor-pointer">
+                <i data-lucide="message-square" class="w-5 h-5"></i>
+              </button>
+            </div>
+            <div class="flex flex-col gap-3 text-sm">
+              <a href="mailto:rishijha@tuta.io" class="flex items-center gap-3 text-slate-600 hover:text-[#0a2540] transition-colors">
+                <i data-lucide="mail" class="w-4 h-4 text-slate-400"></i>
+                <span class="font-medium">rishijha@tuta.io</span>
+              </a>
+              <a href="tel:8882860226" class="flex items-center gap-3 text-slate-600 hover:text-[#0a2540] transition-colors">
+                <i data-lucide="phone" class="w-4 h-4 text-slate-400"></i>
+                <span class="font-medium">+91 8882860226</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    }
+
+    <!-- TAB 2: ABOUT -->
+    @if (currentTab() === 'about') {
+      <div class="max-w-4xl mx-auto animate-in fade-in duration-300">
+        <header class="text-center mb-16">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#0a2540] bg-[#0a2540]/10 px-4 py-1.5 rounded-full inline-block mb-3">Professional Profile</span>
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 mb-3">About Rishi Jha</h1>
+          <p class="font-serif text-lg text-slate-500 italic">Strategic Counsel in Financial Compliance & Taxation</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-200">
+          <div class="aspect-[4/5] bg-slate-200 rounded-2xl overflow-hidden shadow-lg">
+            <img src="https://lh3.googleusercontent.com/d/13R7F8Dx9lous4OgZ908EjAvY3uTL1jgt" alt="Rishi Jha" class="w-full h-full object-cover" referrerpolicy="no-referrer" />
+          </div>
+          <div>
+            <h2 class="font-serif text-3xl font-bold text-slate-900 mb-4">Mission & Vision</h2>
+            <p class="text-slate-600 mb-4 leading-relaxed">
+              Based in Delhi, I provide high-tier financial oversight and specialized tax planning for growth-oriented businesses. Accounting isn't just about balancing books—it's about creating a clear roadmap for financial stability.
+            </p>
+            <p class="text-slate-600 mb-8 leading-relaxed">
+              From complex GST frameworks to meticulous auditing, my practice is built on transparency, precision, and proactive compliance.
+            </p>
+            <button (click)="switchTab('contact')" class="bg-[#0a2540] text-white px-8 py-3.5 rounded-xl font-medium shadow-md hover:bg-[#0d3157] transition-all cursor-pointer flex items-center gap-2">
+              <span>Discuss Your Requirements</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <h2 class="font-serif text-3xl font-bold text-slate-900 text-center mb-8">Core Expertise</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          @for (item of expertise; track item.title) {
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200/80 hover:border-[#0a2540] transition-all">
+              <div class="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center text-[#0a2540] mb-5">
+                <i [attr.data-lucide]="item.icon" class="w-7 h-7"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-slate-900 mb-2">{{ item.title }}</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">{{ item.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- TAB 3: SERVICES -->
+    @if (currentTab() === 'services') {
+      <div class="max-w-6xl mx-auto animate-in fade-in duration-300">
+        <header class="text-center mb-16">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#0a2540] bg-[#0a2540]/10 px-4 py-1.5 rounded-full inline-block mb-3">Comprehensive Solutions</span>
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 mb-3">Our Services</h1>
+          <p class="font-serif text-lg text-slate-500 italic max-w-xl mx-auto">Tailored financial solutions designed to empower your business growth and ensure regulatory compliance.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          @for (service of servicesList; track service.title) {
+            <div class="bg-white p-8 rounded-2xl shadow-md border border-slate-200/80 hover:border-[#0a2540] hover:-translate-y-1 transition-all flex flex-col justify-between">
+              <div>
+                <div class="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center text-[#0a2540] mb-5">
+                  <i [attr.data-lucide]="service.icon" class="w-7 h-7"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">{{ service.title }}</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">{{ service.description }}</p>
+              </div>
+              <button (click)="switchTab('contact')" class="text-[#0a2540] font-semibold text-sm flex items-center gap-2 hover:gap-3 transition-all cursor-pointer">
+                <span>Inquire Now</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- TAB 4: CONTACT -->
+    @if (currentTab() === 'contact') {
+      <div class="max-w-4xl mx-auto animate-in fade-in duration-300">
+        <header class="text-center mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#0a2540] bg-[#0a2540]/10 px-4 py-1.5 rounded-full inline-block mb-3">Get In Touch</span>
+          <h1 class="font-serif text-4xl sm:text-5xl font-bold text-[#0a2540] mb-3">Let's Discuss Your Financial Needs</h1>
+          <p class="text-slate-600 max-w-xl mx-auto">We respond to all professional inquiries within 24 business hours.</p>
+        </header>
+
+        @if (!isSubmitted()) {
+          <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden grid md:grid-cols-5">
+            <!-- Sidebar info -->
+            <div class="md:col-span-2 bg-[#0a2540] text-white p-8 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-2xl font-bold mb-4">Contact Info</h3>
+                <p class="text-slate-300 text-sm mb-8 leading-relaxed">Reach out directly or send an inquiry for professional tax advisory.</p>
+                
+                <ul class="space-y-6 text-sm">
+                  <li class="flex items-start gap-3">
+                    <i data-lucide="map-pin" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                    <span class="text-slate-300 text-xs leading-relaxed">Professional Tax & Accounting Chambers, Delhi</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i data-lucide="mail" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                    <span class="text-slate-300 text-xs">rishijha&#64;tuta.io</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <i data-lucide="phone" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+                    <span class="text-slate-300 text-xs">+91 8882860226</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="mt-8 text-xs text-slate-400 pt-6 border-t border-white/10">
+                Confidentiality guaranteed under professional privilege.
+              </div>
+            </div>
+
+            <!-- Form -->
+            <div class="md:col-span-3 p-8 sm:p-10">
+              <form [formGroup]="contactForm" (ngSubmit)="onContactSubmit()" class="space-y-5">
+                @if (formError()) {
+                  <div class="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs rounded-xl">
+                    {{ formError() }}
+                  </div>
+                }
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Full Name *</label>
+                  <input type="text" formControlName="name" placeholder="John Doe" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0a2540] outline-none text-sm" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Email *</label>
+                    <input type="email" formControlName="email" placeholder="john&#64;example.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0a2540] outline-none text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Phone</label>
+                    <input type="tel" formControlName="phone" placeholder="+91 0000000000" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0a2540] outline-none text-sm" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Service Required *</label>
+                  <select formControlName="serviceType" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0a2540] outline-none text-sm bg-white">
+                    <option value="tax-filing">Income Tax & ITR Filing</option>
+                    <option value="gst">GST Registration & Filing</option>
+                    <option value="bookkeeping">Bookkeeping & MIS Reports</option>
+                    <option value="advisory">Strategic Tax Advisory</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">Message *</label>
+                  <textarea formControlName="message" rows="4" placeholder="Briefly describe your requirements..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0a2540] outline-none text-sm"></textarea>
+                </div>
+
+                <button type="submit" [disabled]="isSubmitting()" class="w-full bg-[#0a2540] text-white py-4 rounded-xl font-semibold hover:bg-[#0d3157] transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70">
+                  @if (isSubmitting()) {
+                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+                    <span>Sending Inquiry...</span>
+                  } @else {
+                    <span>Send Message</span>
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                  }
+                </button>
+              </form>
+            </div>
+          </div>
+        } @else {
+          <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-12 text-center max-w-lg mx-auto">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <i data-lucide="check" class="w-8 h-8"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-[#0a2540] mb-3">Inquiry Sent Successfully!</h3>
+            <p class="text-slate-600 text-sm mb-8">Thank you. Rishi Jha's advisory team will review your requirements and get back to you shortly.</p>
+            <button (click)="resetContact()" class="bg-[#0a2540] text-white px-8 py-3 rounded-xl font-medium cursor-pointer">Send Another Inquiry</button>
+          </div>
+        }
+      </div>
+    }
+
   </main>
-  <app-footer></app-footer>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[#0a2540] text-slate-300 border-t border-slate-800 mt-20">
+    <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-400">
+      <p>&copy; 2026 Rishi Jha. All rights reserved. Professional Tax & Accounting Services.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== SECURE CLIENT PORTAL MODAL ==================== -->
+  @if (isModalVisible()) {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-200 animate-in fade-in zoom-in-95 duration-200">
+        <div class="bg-slate-50 px-6 py-5 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#0a2540]/10 flex items-center justify-center text-[#0a2540]">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[#0a2540]">Secure Client Portal</h3>
+          </div>
+          <button (click)="closeModal()" class="text-slate-400 hover:text-slate-700 p-2 rounded-lg cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <div class="p-6">
+          <p class="text-slate-600 text-sm mb-6">Enter your provided access code to view protected documents and financial filings.</p>
+          
+          <input 
+            type="password" 
+            [value]="passwordInput()" 
+            (input)="passwordInput.set($any($event.target).value); errorMessage.set('')" 
+            (keydown)="handleKey($event)" 
+            placeholder="Enter Access Code" 
+            class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#0a2540] outline-none text-sm font-medium mb-2" />
+
+          @if (errorMessage()) {
+            <p class="text-rose-600 text-xs font-semibold mb-4">{{ errorMessage() }}</p>
+          }
+
+          <div class="flex justify-end gap-3 mt-6">
+            <button (click)="closeModal()" class="px-5 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer">Cancel</button>
+            <button (click)="verifyPassword()" class="px-6 py-2.5 text-sm font-semibold text-white bg-[#0a2540] hover:bg-[#0d3157] rounded-xl shadow-md cursor-pointer flex items-center gap-2">
+              <span>Access Portal</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
 </div>

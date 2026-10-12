@@ -1,97 +1,162 @@
-<header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 transition-all duration-300">
-  <!-- Scroll Progress Indicator -->
-  <div class="h-1 bg-slate-100 w-full absolute top-0 left-0 overflow-hidden">
-    <div class="h-full bg-emerald-600 transition-all duration-150" [style.width.%]="scrollProgress()"></div>
-  </div>
+<!-- Scroll Progress Bar -->
+<div class="h-1 bg-slate-100 w-full fixed top-0 left-0 z-[60] overflow-hidden">
+  <div class="h-full bg-emerald-600 transition-all duration-150" [style.width.%]="scrollProgress()"></div>
+</div>
 
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- ==================== DESKTOP NAVIGATION BAR ==================== -->
+<header class="hidden md:block bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/80 shadow-xs transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       <!-- Brand Logo -->
-      <div class="flex items-center">
-        <a routerLink="/home" (click)="closeMenu()" class="flex items-center gap-3 group select-none">
-          <!-- Logo Mark -->
-          <div class="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center bg-[#0a2540] rounded-xl shadow-lg shadow-[#0a2540]/20 overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl group-hover:bg-[#0d3157] border border-white/10">
-            <div class="absolute -top-3 -right-3 w-8 h-8 bg-white/10 rounded-full blur-[1px]"></div>
-            <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/20 to-transparent"></div>
-            <span class="font-serif text-white text-2xl font-bold italic pt-1 pr-0.5 relative z-10">R</span>
-          </div>
-          
-          <!-- Logo Text -->
-          <div class="flex flex-col justify-center">
-            <span class="font-serif text-xl sm:text-2xl font-bold text-[#0a2540] leading-none tracking-tight transition-colors group-hover:text-[#0d3157]">Rishi Jha</span>
-            <span class="text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.25em] text-slate-500 mt-1">Tax & Accounting Expert</span>
-          </div>
-        </a>
-      </div>
+      <a routerLink="/home" class="flex items-center gap-3.5 group select-none">
+        <div class="relative w-11 h-11 flex items-center justify-center bg-[#0a2540] rounded-xl shadow-md shadow-[#0a2540]/20 overflow-hidden transition-transform duration-300 group-hover:scale-105">
+          <div class="absolute -top-3 -right-3 w-8 h-8 bg-white/10 rounded-full blur-[1px]"></div>
+          <span class="font-serif text-white text-2xl font-bold italic pt-1 relative z-10">R</span>
+        </div>
+        <div class="flex flex-col justify-center">
+          <span class="font-serif text-2xl font-bold text-[#0a2540] leading-none tracking-tight">Rishi Jha</span>
+          <span class="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-slate-500 mt-1">Tax & Accounting Expert</span>
+        </div>
+      </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-1">
-        <a routerLink="/home" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" [routerLinkActiveOptions]="{exact: true}" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
+      <!-- Desktop Nav Links -->
+      <nav class="flex items-center space-x-1">
+        <a routerLink="/home" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" [routerLinkActiveOptions]="{exact: true}" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
           <i data-lucide="home" class="w-4 h-4"></i>
           <span>Home</span>
         </a>
-        <a routerLink="/about" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
+        <a routerLink="/about" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
           <i data-lucide="user" class="w-4 h-4"></i>
           <span>About</span>
         </a>
-        <a routerLink="/services" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
+        <a routerLink="/services" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
           <i data-lucide="briefcase" class="w-4 h-4"></i>
           <span>Services</span>
         </a>
-        <a routerLink="/contact" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
+        <a routerLink="/contact" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-600 hover:text-[#0a2540] hover:bg-slate-100 px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2">
           <i data-lucide="mail" class="w-4 h-4"></i>
           <span>Contact</span>
         </a>
-        
-        <div class="h-5 w-px bg-slate-200 mx-2"></div>
+      </nav>
 
-        <a routerLink="/contact" class="bg-[#0a2540] text-white hover:bg-[#0d3157] px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 shadow-md shadow-[#0a2540]/20 hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 group/btn">
-          <span>Client Consultation</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"></i>
-        </a>
-      </div>
-      
-      <!-- Mobile Menu Button -->
-      <div class="flex md:hidden">
-        <button (click)="toggleMenu()" type="button" class="bg-white inline-flex items-center justify-center p-2.5 rounded-xl text-slate-700 hover:text-[#0a2540] hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0a2540] border border-slate-200 shadow-sm" aria-controls="mobile-menu" [attr.aria-expanded]="isMenuOpen()">
-          <span class="sr-only">Toggle main menu</span>
-          @if (!isMenuOpen()) {
-            <i data-lucide="menu" class="block h-6 w-6"></i>
-          } @else {
-            <i data-lucide="x" class="block h-6 w-6"></i>
-          }
-        </button>
+      <!-- Desktop Auth / Sign In Section -->
+      <div class="flex items-center gap-3">
+        @if (!firebaseService.currentUser()) {
+          <button (click)="signInWithGoogle()" [disabled]="isLoggingIn()" class="bg-[#0a2540] hover:bg-[#0d3157] text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md shadow-[#0a2540]/20 hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer disabled:opacity-70">
+            @if (isLoggingIn()) {
+              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i>
+              <span>Signing In...</span>
+            } @else {
+              <i data-lucide="log-in" class="w-4 h-4"></i>
+              <span>Sign In</span>
+            }
+          </button>
+        } @else {
+          <div class="flex items-center gap-3 bg-slate-100 border border-slate-200/80 px-4 py-1.5 rounded-full shadow-xs">
+            @if (firebaseService.currentUser()?.photoURL) {
+              <img [src]="firebaseService.currentUser()?.photoURL" alt="User avatar" class="w-7 h-7 rounded-full object-cover border border-slate-300" referrerpolicy="no-referrer" />
+            } @else {
+              <div class="w-7 h-7 rounded-full bg-[#0a2540] text-white flex items-center justify-center text-xs font-bold">
+                {{ firebaseService.currentUser()?.email?.[0]?.toUpperCase() || 'U' }}
+              </div>
+            }
+            <span class="text-xs font-semibold text-[#0a2540] max-w-[130px] truncate">{{ firebaseService.currentUser()?.displayName || firebaseService.currentUser()?.email }}</span>
+            <div class="h-4 w-px bg-slate-300 mx-1"></div>
+            <button (click)="signOutUser()" title="Sign Out" class="text-slate-500 hover:text-rose-600 p-1 rounded-full hover:bg-rose-50 transition-colors cursor-pointer">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+            </button>
+          </div>
+        }
       </div>
     </div>
-  </nav>
+  </div>
+</header>
 
-  <!-- Mobile Menu Drawer -->
-  @if (isMenuOpen()) {
-    <div class="md:hidden border-t border-slate-200 absolute w-full bg-white shadow-2xl z-50 animate-in slide-in-from-top-2 duration-200" id="mobile-menu">
-      <div class="px-4 pt-4 pb-6 space-y-2">
-        <a routerLink="/home" (click)="closeMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" [routerLinkActiveOptions]="{exact: true}" class="text-slate-700 hover:bg-slate-100 hover:text-[#0a2540] flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors">
-          <i data-lucide="home" class="w-5 h-5 text-[#0a2540]"></i>
-          <span>Home</span>
-        </a>
-        <a routerLink="/about" (click)="closeMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-700 hover:bg-slate-100 hover:text-[#0a2540] flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors">
-          <i data-lucide="user" class="w-5 h-5 text-[#0a2540]"></i>
-          <span>About Rishi Jha</span>
-        </a>
-        <a routerLink="/services" (click)="closeMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-700 hover:bg-slate-100 hover:text-[#0a2540] flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors">
-          <i data-lucide="briefcase" class="w-5 h-5 text-[#0a2540]"></i>
-          <span>Tax & Accounting Services</span>
-        </a>
-        <a routerLink="/contact" (click)="closeMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="text-slate-700 hover:bg-slate-100 hover:text-[#0a2540] flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors">
-          <i data-lucide="mail" class="w-5 h-5 text-[#0a2540]"></i>
-          <span>Contact Us</span>
-        </a>
-        
-        <div class="pt-4 mt-2 border-t border-slate-200">
-          <a routerLink="/contact" (click)="closeMenu()" class="w-full bg-[#0a2540] text-white hover:bg-[#0d3157] flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-base font-medium transition-colors shadow-md">
-            <span>Schedule Consultation</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </a>
+
+<!-- ==================== MOBILE NAVIGATION BAR & DRAWER ==================== -->
+<header class="block md:hidden bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-xs">
+  <div class="px-4 h-16 flex items-center justify-between">
+    <!-- Brand -->
+    <a routerLink="/home" class="flex items-center gap-2.5 select-none">
+      <div class="w-9 h-9 flex items-center justify-center bg-[#0a2540] rounded-xl shadow-md text-white font-serif font-bold italic text-lg">R</div>
+      <span class="font-serif text-lg font-bold text-[#0a2540]">Rishi Jha</span>
+    </a>
+
+    <!-- Mobile Action / Trigger -->
+    <div class="flex items-center gap-2">
+      @if (firebaseService.currentUser()) {
+        <div class="w-8 h-8 rounded-full bg-[#0a2540] text-white flex items-center justify-center text-xs font-bold overflow-hidden border border-slate-200">
+          @if (firebaseService.currentUser()?.photoURL) {
+            <img [src]="firebaseService.currentUser()?.photoURL" alt="avatar" class="w-full h-full object-cover" referrerpolicy="no-referrer" />
+          } @else {
+            {{ firebaseService.currentUser()?.email?.[0]?.toUpperCase() }}
+          }
         </div>
+      }
+      <button (click)="toggleMobileMenu()" type="button" class="p-2 rounded-xl bg-slate-100 text-[#0a2540] border border-slate-200 focus:outline-none cursor-pointer">
+        @if (!isMobileMenuOpen()) {
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        } @else {
+          <i data-lucide="x" class="w-6 h-6"></i>
+        }
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Slide-out Menu -->
+  @if (isMobileMenuOpen()) {
+    <div class="fixed inset-x-0 top-16 bg-white/98 backdrop-blur-xl border-b border-slate-200 shadow-2xl p-6 space-y-4 z-50 animate-in slide-in-from-top-2 duration-200">
+      <nav class="space-y-2">
+        <a routerLink="/home" (click)="closeMobileMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" [routerLinkActiveOptions]="{exact: true}" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors">
+          <i data-lucide="home" class="w-5 h-5 text-[#0a2540]"></i>
+          <span class="font-medium text-base">Home</span>
+        </a>
+        <a routerLink="/about" (click)="closeMobileMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors">
+          <i data-lucide="user" class="w-5 h-5 text-[#0a2540]"></i>
+          <span class="font-medium text-base">About</span>
+        </a>
+        <a routerLink="/services" (click)="closeMobileMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors">
+          <i data-lucide="briefcase" class="w-5 h-5 text-[#0a2540]"></i>
+          <span class="font-medium text-base">Services</span>
+        </a>
+        <a routerLink="/contact" (click)="closeMobileMenu()" routerLinkActive="bg-[#0a2540]/10 text-[#0a2540] font-semibold" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors">
+          <i data-lucide="mail" class="w-5 h-5 text-[#0a2540]"></i>
+          <span class="font-medium text-base">Contact</span>
+        </a>
+      </nav>
+
+      <div class="pt-4 border-t border-slate-200">
+        @if (!firebaseService.currentUser()) {
+          <button (click)="signInWithGoogle(); closeMobileMenu()" [disabled]="isLoggingIn()" class="w-full bg-[#0a2540] hover:bg-[#0d3157] text-white py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-md cursor-pointer disabled:opacity-70">
+            @if (isLoggingIn()) {
+              <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+              <span>Signing In...</span>
+            } @else {
+              <i data-lucide="log-in" class="w-5 h-5"></i>
+              <span>Sign In</span>
+            }
+          </button>
+        } @else {
+          <div class="flex items-center justify-between bg-slate-100 p-4 rounded-xl">
+            <div class="flex items-center gap-3">
+              @if (firebaseService.currentUser()?.photoURL) {
+                <img [src]="firebaseService.currentUser()?.photoURL" alt="avatar" class="w-10 h-10 rounded-full object-cover" referrerpolicy="no-referrer" />
+              } @else {
+                <div class="w-10 h-10 rounded-full bg-[#0a2540] text-white flex items-center justify-center font-bold">
+                  {{ firebaseService.currentUser()?.email?.[0]?.toUpperCase() }}
+                </div>
+              }
+              <div class="flex flex-col">
+                <span class="text-sm font-bold text-[#0a2540] truncate max-w-[160px]">{{ firebaseService.currentUser()?.displayName }}</span>
+                <span class="text-xs text-slate-500 truncate max-w-[160px]">{{ firebaseService.currentUser()?.email }}</span>
+              </div>
+            </div>
+            <button (click)="signOutUser(); closeMobileMenu()" class="text-rose-600 hover:text-rose-700 p-2 rounded-lg bg-white border border-slate-200 text-xs font-semibold flex items-center gap-1 cursor-pointer shadow-xs">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+              <span>Sign Out</span>
+            </button>
+          </div>
+        }
       </div>
     </div>
   }

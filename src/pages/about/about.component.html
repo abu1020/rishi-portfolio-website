@@ -1,43 +1,66 @@
-
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8 reveal">
+    <a routerLink="/home" class="hover:text-[#0a2540] transition-colors flex items-center gap-1">
+      <i data-lucide="home" class="w-4 h-4"></i> Home
+    </a>
+    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+    <span class="text-[#0a2540] font-medium">About Rishi Jha</span>
+  </nav>
+
   <header class="text-center mb-16 md:mb-24 reveal">
+    <span class="text-xs font-bold uppercase tracking-widest text-[#0a2540] bg-[#0a2540]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">Professional Profile</span>
     <h1 class="font-serif text-4xl sm:text-5xl font-bold text-slate-900 mb-2">About Us</h1>
     <p class="font-serif text-lg text-slate-500 italic">Rishi Jha | Strategic Counsel in Financial Compliance</p>
   </header>
 
-  <div class="grid gap-16 md:gap-24">
+  <div class="grid gap-16 md:gap-24 mb-20">
     <!-- Bio Section -->
     <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center reveal">
       <div class="group relative order-last md:order-first">
-        <div class="w-full aspect-[4/5] bg-slate-200 overflow-hidden shadow-[20px_20px_0px_-2px_#1e293b] transition-all duration-500 ease-in-out group-hover:shadow-[25px_25px_0px_-2px_#1e293b] group-hover:-translate-x-1 group-hover:-translate-y-1">
-          <img src="https://lh3.googleusercontent.com/d/13R7F8Dx9lous4OgZ908EjAvY3uTL1jgt" alt="Rishi Jha Portrait" class="w-full h-full object-cover object-center filter grayscale-[50%] group-hover:grayscale-0 transition-all duration-500 ease-in-out scale-105 group-hover:scale-110" />
+        <div class="w-full aspect-[4/5] bg-slate-200 rounded-2xl overflow-hidden shadow-[20px_20px_0px_-2px_#0a2540] transition-all duration-500 ease-in-out group-hover:shadow-[25px_25px_0px_-2px_#0a2540] group-hover:-translate-x-1 group-hover:-translate-y-1">
+          <img src="https://lh3.googleusercontent.com/d/13R7F8Dx9lous4OgZ908EjAvY3uTL1jgt" alt="Rishi Jha Portrait" class="w-full h-full object-cover object-center filter grayscale-[30%] group-hover:grayscale-0 transition-all duration-500 ease-in-out scale-105 group-hover:scale-110" referrerpolicy="no-referrer" />
         </div>
       </div>
       <div class="text-center md:text-left">
-        <h2 class="font-serif text-4xl font-bold text-slate-900 leading-tight mb-6">The Mission</h2>
-        <p class="text-lg text-slate-600 mb-4">
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slate-900 leading-tight mb-6">The Mission & Vision</h2>
+        <p class="text-lg text-slate-600 mb-4 leading-relaxed">
           Based in Delhi, I provide high-tier financial oversight and specialized tax planning for growth-oriented businesses. I believe that accounting isn't just about balancing books—it's about creating a clear roadmap for financial stability.
         </p>
-        <p class="text-lg text-slate-600">
+        <p class="text-lg text-slate-600 leading-relaxed mb-8">
           From complex GST frameworks to meticulous auditing, my practice is built on the pillars of transparency, precision, and proactive compliance.
         </p>
+        <a routerLink="/contact" class="inline-flex items-center gap-2 bg-[#0a2540] text-white px-8 py-3.5 rounded-full font-medium transition-all shadow-md hover:bg-[#0d3157] hover:shadow-lg">
+          <span>Get in Touch</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
       </div>
     </section>
 
     <!-- Expertise Section -->
     <section>
-      <h2 class="font-serif text-4xl font-bold text-slate-900 text-center mb-12 reveal">Core Expertise</h2>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12 reveal">Core Expertise</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
         @for (item of expertise; track item.title) {
-          <div class="bg-white p-8 border border-slate-200 h-full flex flex-col transition-all duration-300 ease-in-out hover:border-slate-800 hover:-translate-y-2 hover:shadow-2xl reveal">
-            <div class="w-16 h-16 flex items-center justify-center bg-slate-100 rounded-full mb-6">
-              <i [attr.data-lucide]="item.icon" class="w-8 h-8 text-slate-800"></i>
+          <div class="bg-white p-8 border border-slate-200/80 rounded-2xl h-full flex flex-col transition-all duration-300 ease-in-out hover:border-[#0a2540] hover:-translate-y-2 hover:shadow-xl reveal">
+            <div class="w-16 h-16 flex items-center justify-center bg-slate-100 rounded-2xl mb-6">
+              <i [attr.data-lucide]="item.icon" class="w-8 h-8 text-[#0a2540]"></i>
             </div>
             <h3 class="font-serif text-2xl font-bold text-slate-900 mb-3">{{ item.title }}</h3>
-            <p class="text-slate-600 leading-relaxed">{{ item.description }}</p>
+            <p class="text-slate-600 leading-relaxed text-sm">{{ item.description }}</p>
           </div>
         }
       </div>
     </section>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 text-center reveal">
+    <h3 class="font-serif text-2xl sm:text-3xl font-bold mb-3">Ready to optimize your taxes?</h3>
+    <p class="text-slate-400 text-sm mb-6">Connect with Rishi Jha today for a professional consultation.</p>
+    <a routerLink="/contact" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium px-8 py-3 rounded-full transition-all shadow-md">
+      <span>Book Consultation</span>
+      <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    </a>
   </div>
 </div>

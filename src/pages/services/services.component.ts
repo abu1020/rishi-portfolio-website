@@ -1,5 +1,5 @@
-
 import { Component, ChangeDetectionStrategy, ElementRef, inject, afterNextRender, DestroyRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 declare var lucide: any;
 
@@ -7,7 +7,7 @@ declare var lucide: any;
   selector: 'app-services',
   templateUrl: './services.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [RouterLink],
 })
 export class ServicesComponent {
   private elementRef = inject(ElementRef);

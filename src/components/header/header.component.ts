@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, signal, afterNextRender, HostListener } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, afterNextRender, HostListener, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { FirebaseService } from '../../services/firebase.service';
 
 declare var lucide: any;
 
@@ -10,8 +11,11 @@ declare var lucide: any;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  isMenuOpen = signal(false);
+  firebaseService = inject(FirebaseService);
+  
+  isMobileMenuOpen = signal(false);
   scrollProgress = signal(0);
+  isLoggingIn = signal(false);
 
   constructor() {
     afterNextRender(() => {
@@ -28,12 +32,27 @@ export class HeaderComponent {
     }
   }
 
-  toggleMenu() {
-    this.isMenuOpen.update(value => !value);
-    setTimeout(() => lucide.createIcons(), 0);
+  async signInWithGoogle() {
+    this.isLoggingIn.set(true);
+    try {
+      await this.firebaseService.loginWithGoogle();
+    } finally {
+      this.isLoggingIn.set(false);
+      setTimeout(() => lucide.createIcons(), 50);
+    }
   }
 
-  closeMenu() {
-    this.isMenuOpen.set(false);
+  async signOutUser() {
+    await this.firebaseService.logout();
+    setTimeout(() => lucide.createIcons(), 50);
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen.update(val => !val);
+    setTimeout(() => lucide.createIcons(), 50);
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen.set(false);
   }
 }

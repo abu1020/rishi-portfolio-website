@@ -1,5 +1,5 @@
-
 import { Component, ChangeDetectionStrategy, signal, afterNextRender, ViewChild, ElementRef, inject, DestroyRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 declare var lucide: any;
 
@@ -7,7 +7,7 @@ declare var lucide: any;
   selector: 'app-home',
   templateUrl: './home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [RouterLink],
 })
 export class HomeComponent {
   isModalVisible = signal(false);
